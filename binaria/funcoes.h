@@ -8,10 +8,6 @@ typedef struct no{
     struct no *right;
 }no;
 
-typedef struct{
-    no *raiz;
-}arvore;
-
 #define red "\033[31m" 
 #define green "\033[32m"
 #define blue "\033[34m"
@@ -23,6 +19,9 @@ typedef struct{
 void esperar()
 
 //função para imprimir a lista de contatos
-void imprimir(no *raiz,int *cont)
+void imprimir(no *aux,int *cont)
+
+//função para adicionar um contato
+void adicionar(no *raiz,char nome[50], int telefone)
 
 #endif

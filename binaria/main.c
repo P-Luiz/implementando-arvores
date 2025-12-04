@@ -4,9 +4,11 @@
 #include "funcoes.h"
 
 int main(){
-    Arvore *arvore = malloc(sizeof(Arvore));
-    arvore->raiz = NULL;
-    int escolha,cont;
+    no *raiz;
+    raiz = NULL;
+    no *aux;
+    int escolha,cont,telefone;
+    char nome[50];
     while(escolha != 6){
         system ("clear");
         printf("------------------------------\n");
@@ -23,21 +25,29 @@ int main(){
         system("clear");
         switch(escolha){
             case 1:
-                if(arvore->raiz == NULL){
+                if(raiz == NULL){
                     printf(red"A lista de contatos esta vazia!"reset);
                     esperar();
                     break;
                 }
                 cont = 1;
+                aux = raiz;
                 printf("-------------------\n");
                 printf("= C O N T A T O S =\n");
                 printf("-------------------\n\n");
                 printf("-----------------------------");
                 printf("ORDEM |   NOME   |   NÚMERO\n");
-                imprimir(arvore->raiz,&cont);
+                imprimir(aux,&cont);
                 printf("-----------------------------");
                 break;
             case 2:
+                printf("Digite o nome do novo contato: \n");
+                scanf("%s",&nome);
+                printf("Digite o telefone do novo contato: \n");
+                scanf("%d",&telefone);
+                adicionar(raiz,nome,telefone);
+                printf("%s foi adicionado a lista de contatos",nome);
+                esperar();
                 break;
             case 3:
                 break;
@@ -49,5 +59,6 @@ int main(){
                 printf(red"Escolha Inválida!\n" reset);
                 break;
         }
+    }
     return 0;
 }
