@@ -16,12 +16,12 @@ typedef struct no{
 #define reset "\033[0m"
 
 //função para pausar o programa e esperar o usuario digitar enter
-void esperar()
+void esperar();
 
 //função para imprimir a lista de contatos
-void imprimir(no *aux,int *cont)
+void imprimir(no *aux,int *cont);
 
 //função para adicionar um contato
-void adicionar(no *raiz,char nome[50], int telefone)
+no *adicionar(no *raiz,char nome[50], int telefone);
 
 #endif

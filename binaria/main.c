@@ -26,7 +26,7 @@ int main(){
         switch(escolha){
             case 1:
                 if(raiz == NULL){
-                    printf(red"A lista de contatos esta vazia!"reset);
+                    printf(red"A lista de contatos esta vazia!\n"reset);
                     esperar();
                     break;
                 }
@@ -35,18 +35,18 @@ int main(){
                 printf("-------------------\n");
                 printf("= C O N T A T O S =\n");
                 printf("-------------------\n\n");
-                printf("-----------------------------");
+                printf("-----------------------------\n");
                 printf("ORDEM |   NOME   |   NÚMERO\n");
                 imprimir(aux,&cont);
-                printf("-----------------------------");
+                printf("-----------------------------\n\n");
                 break;
             case 2:
                 printf("Digite o nome do novo contato: \n");
-                scanf("%s",&nome);
+                scanf(" %49[^\n]", nome);
                 printf("Digite o telefone do novo contato: \n");
                 scanf("%d",&telefone);
-                adicionar(raiz,nome,telefone);
-                printf("%s foi adicionado a lista de contatos",nome);
+                raiz = adicionar(raiz,nome,telefone);
+                printf("%s foi adicionado a lista de contatos\n",nome);
                 esperar();
                 break;
             case 3:
@@ -54,6 +54,8 @@ int main(){
             case 4:
                 break;
             case 5:
+                break;
+            case 6:
                 break;
             default:
                 printf(red"Escolha Inválida!\n" reset);
