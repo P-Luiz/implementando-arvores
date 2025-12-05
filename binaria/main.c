@@ -50,8 +50,63 @@ int main(){
                 esperar();
                 break;
             case 3:
+                if (raiz == NULL){
+                    printf(red"Nenhum contato foi registrado!\n"reset);
+                    break;
+                }
+                printf("digite o nome do contato que quer procurar: \n");
+                scanf(" %49[^\n]", nome);
+                cont = buscar(raiz,nome);
                 break;
             case 4:
+                if(raiz == NULL){
+                    printf(red"não tem contatos pra editar!\n"reset);
+                }
+                aux = raiz;
+                cont = 1;
+                while(1){
+                    system("clear");
+                    imprimir(aux,&cont);
+                    printf("Digite o nome do contato que quer editar: \n");
+                    scanf(" %49[^\n]", nome);
+                    cont = buscar(raiz,nome);
+                    if (cont == 1 ){
+                        break;
+                    }
+                }
+                while(escolha != 4){
+                    printf("---------------\n");
+                    printf("= E D I T A R =\n");
+                    printf("---------------\n\n");
+                    printf("1 - Editar nome\n");
+                    printf("2 - Editar Número\n");
+                    printf("3 - Excluir contato\n");
+                    printf("4 - Sair\n");
+                    printf("Escolha: \n");
+                    scanf("%d",&escolha);
+                        system("clear");
+                    switch(escolha){
+                        case 1:
+                            char nnome[50];
+                            printf("digite o novo nome: \n");
+                            scanf(" %49[^\n]", nnome);
+                            raiz = trocar_nom(raiz,nome,nnome);
+                            break;
+                        case 2:
+                            printf("digite o novo número: \n");
+                            scanf("%d",&telefone);
+                            raiz = trocar_num(raiz,nome,telefone);
+                            break;
+                        case 3:
+                            raiz = excluir(raiz,nome);
+                            printf(green"Contato excluido!\n"reset)
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            printf(red"selecione uma opção válida\n"reset);
+                    }
+                }
                 break;
             case 5:
                 break;

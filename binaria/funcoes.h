@@ -24,4 +24,18 @@ void imprimir(no *aux,int *cont);
 //função para adicionar um contato
 no *adicionar(no *raiz,char nome[50], int telefone);
 
+//função para buscar um contato
+int buscar (no *raiz,char nome[50]);
+
+//função para mostrar a estrutura da arvore
+void mostrar()
+
+//função para trocar o nome do contato
+no *trocar_nom(no* raiz,char nome[50],char nnome[50]);
+
+//função para trocar o número do contato
+no *trocar_num(no* raiz,char nome[50],int telefone);
+
+//função para excluir um contato
+no *excluir(no *raiz,char nome[50]);
 #endif
