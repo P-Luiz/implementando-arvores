@@ -98,7 +98,18 @@ int buscar (no *raiz,char nome[50]){
 
 //função para trocar o nome do contato
 no *trocar_nom(no* raiz,char[50]nome,char[50]nnome){
-
+    no *aux = raiz;
+    int comp = strcmp(aux->nome,nome);
+    if(comp == 0){
+        raiz = adicionar(raiz,nnome,aux->telefone);
+        raiz = excluir(raiz,nome);
+    }
+    else if(comp < 0 ){
+        aux = aux -> right;
+    }
+    else{
+        aux = aux -> left;
+    }
 }
 
 //função para trocar o número do contato
@@ -124,5 +135,46 @@ no *trocar_num(no* raiz,char[50]nome,int telefone){
 
 //função para excluir um contato
 no *excluir(no *raiz,char nome[50]){
-    
-}    
+    if (strcmp(raiz->nome , nome) == 0){
+        if(raiz -> left == NULL){
+            no *aux = raiz ->right;
+            free(raiz);
+            return aux;
+        }
+        if(raiz -> right == NULL){
+            no *aux = raiz ->left;
+            free(raiz);
+            return aux;
+        }
+        else if(raiz->right != NULL && raiz ->left != NULL){
+            no*aux = raiz -> left;
+            while (aux->right != NULL){
+                aux = aux ->right;
+            }
+            strcpy(raiz->nome,aux->nome);
+            raiz->telefone = aux->telefone;
+            raiz ->left = excluir(raiz ->left,aux->nome);
+        }
+    }
+    else if(strcmp(raiz->nome , nome) < 0){
+        raiz -> right = excluir(raiz->right,nome);
+    }
+    else if(strcmp(raiz->nome , nome) > 0){
+        raiz -> left  = excluir(raiz->left,nome);
+    }
+    return raiz;
+}   
+
+//função para mostrar a estrutura da arvore
+void mostrar(no*raiz, int camada){
+    if(raiz == NULL){
+        return;
+    }
+    mostrar(raiz->right,camada+1);
+    printf("\n");
+    for (int i = 0;i < camada;i++){
+        printf("\t");
+    }
+    printf("%s\n",raiz->nome);
+    mostrar(raiz->left,camada+1);
+}

@@ -38,4 +38,7 @@ no *trocar_num(no* raiz,char nome[50],int telefone);
 
 //função para excluir um contato
 no *excluir(no *raiz,char nome[50]);
+
+//função para mostrar a estrutura da arvore
+void mostrar(no*raiz, int camada);
 #endif

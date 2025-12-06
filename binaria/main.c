@@ -39,6 +39,7 @@ int main(){
                 printf("ORDEM |   NOME   |   NÚMERO\n");
                 imprimir(aux,&cont);
                 printf("-----------------------------\n\n");
+                esperar()
                 break;
             case 2:
                 printf("Digite o nome do novo contato: \n");
@@ -57,6 +58,7 @@ int main(){
                 printf("digite o nome do contato que quer procurar: \n");
                 scanf(" %49[^\n]", nome);
                 cont = buscar(raiz,nome);
+                esperar()
                 break;
             case 4:
                 if(raiz == NULL){
@@ -91,15 +93,20 @@ int main(){
                             printf("digite o novo nome: \n");
                             scanf(" %49[^\n]", nnome);
                             raiz = trocar_nom(raiz,nome,nnome);
+                            printf(green"Nome trocado com sucesso!\n"reset);
+                            esperar()
                             break;
                         case 2:
                             printf("digite o novo número: \n");
                             scanf("%d",&telefone);
                             raiz = trocar_num(raiz,nome,telefone);
+                            printf(green"Número trocado com sucesso!\n"reset);
+                            esperar()
                             break;
                         case 3:
                             raiz = excluir(raiz,nome);
                             printf(green"Contato excluido!\n"reset)
+                            esperar()
                             break;
                         case 4:
                             break;
@@ -109,6 +116,12 @@ int main(){
                 }
                 break;
             case 5:
+                if(raiz == NULL){
+                    printf(red"Lista vazia!\n"reset);
+                    break;
+                }
+                cont = 0;
+                mostrar(raiz,cont);
                 break;
             case 6:
                 break;
