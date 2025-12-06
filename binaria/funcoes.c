@@ -5,21 +5,25 @@
 
 //função para pausar o programa e esperar o usuario digitar enter
 void esperar(){
-    system(green"read -p 'digite ENTER para continuar...'var"reset);
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+    printf(green "Digite ENTER para continuar..." reset);
+    getchar();
 }
 
 //função para imprimir a lista de contatos
 void imprimir(no *aux,int *cont){
-    if (aux -> left != NULL){
-        imprimir(aux->left,cont);
+    if(aux == NULL){
+        return;
     }
-    printf("%-7d %-11s %-9d",cont, aux->nome, aux->telefone);
+    imprimir(aux->left,cont);
+    printf("%d%-6s|%-10s|%-9lld\n",*cont,"º", aux->nome, aux->telefone);
     (*cont) ++;
     imprimir(aux->right,cont);
 }
 
 //função para adicionar um contato
-no* adicionar(no *raiz,char nome[50], int telefone){
+no* adicionar(no *raiz,char nome[50], long long int telefone){
     no *novo = malloc(sizeof (no));
     if (novo==NULL){
         printf(red"erro na alocação!\n"reset);
@@ -73,10 +77,9 @@ no* adicionar(no *raiz,char nome[50], int telefone){
 int buscar (no *raiz,char nome[50]){
     int comp;
     while (1){
-        comp = strcpm(raiz->nome,nome);
+        comp = strcmp(raiz->nome,nome);
         if(comp == 0){
-            printf("Contato encontrado:\nNOME:%s\nTELEFONE:%d\n",nome,raiz->telefone);
-            esperar();
+            printf("Contato encontrado:\nNOME:%s\nTELEFONE:%lld\n",nome,raiz->telefone);
             return 1;
         }
         else if(comp < 0 ){
@@ -97,30 +100,32 @@ int buscar (no *raiz,char nome[50]){
 }
 
 //função para trocar o nome do contato
-no *trocar_nom(no* raiz,char[50]nome,char[50]nnome){
+no *trocar_nom(no* raiz,char nome[50],char nnome[50]){
     no *aux = raiz;
-    int comp = strcmp(aux->nome,nome);
-    if(comp == 0){
-        raiz = adicionar(raiz,nnome,aux->telefone);
-        raiz = excluir(raiz,nome);
-    }
-    else if(comp < 0 ){
-        aux = aux -> right;
-    }
-    else{
-        aux = aux -> left;
+    while(1){
+        int comp = strcmp(aux->nome,nome);
+        if(comp == 0){
+            raiz = adicionar(raiz,nnome,aux->telefone);
+            raiz = excluir(raiz,nome);
+            return raiz;
+        }
+        else if(comp < 0 ){
+            aux = aux -> right;
+        }
+        else{
+            aux = aux -> left;
+        }
     }
 }
 
 //função para trocar o número do contato
-no *trocar_num(no* raiz,char[50]nome,int telefone){
+no *trocar_num(no* raiz,char nome[50],long long int telefone){
     int comp;
     no* aux = raiz;
     while(1){
         comp = strcmp(aux -> nome,nome);
         if (comp == 0){
             aux ->telefone = telefone;
-            printf(green"Número trocado com sucesso!\n"reset);
             break;
         }
         else if(comp < 0){
