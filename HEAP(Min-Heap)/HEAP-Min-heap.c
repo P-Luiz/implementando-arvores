@@ -85,7 +85,7 @@ int removermin(heap *h){
 
 void imprimirheap(heap *h){
     for( int cont = 0;cont < h->tamanho;cont++){
-        printf("%d",h->dados[cont]);
+        printf("%d:%d",cont,h->dados[cont]);
         printf("\n");
     }
 }
@@ -114,15 +114,24 @@ int main(){
             h = criarheap(cap);
             break;
         case 2:
-            system("clear");
+            if(h == NULL){
+                printf("Insira a capacidade primeiro!\n");
+                while (getchar() != '\n');
+                break;
+            }
             printf("Insira um dado:\n");
-            scanf("%d",&data);
+            if (scanf("%d", &data) != 1) {
+                while (getchar() != '\n');
+                printf("Dado inválido.\n"); 
+                break;
+            }
             inserir(h,data);
             break;
         case 3:
             if(cap == 0 || h->tamanho == 0){
-            printf("Heap vazio!\n");  
-            break;
+                printf("Heap vazio!\n");  
+                while (getchar() != '\n');
+                break;
             }
             printf("Removendo Min-Heap...\n");
             removermin(h);
