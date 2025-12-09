@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
+typedef struct{//struct do heap
     int *dados;
     int tamanho;
     int capacidade;
 }heap;
 
-heap* criarheap(int capacidade){
+heap* criarheap(int capacidade){ //alocação de memória do heap e do vetor
     heap *h = (heap*)malloc(sizeof(heap));
     h->dados = malloc(capacidade * sizeof(int));
     h->tamanho = 0;
@@ -15,32 +15,32 @@ heap* criarheap(int capacidade){
     return h;
 }
 
-void trocar(int *a, int *b){
+void trocar(int *a, int *b){//função para trocar indices e valores
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-int pai(int i){
+int pai(int i){//definição da regra para pai
     return (i-1)/2;
 }
 
-int filhodir(int i){
+int filhodir(int i){//definição da regra para filhos à direita
     return 2 *i+2;
 }
 
-int filhoesq(int i){
+int filhoesq(int i){//definição da regra para filhos à esquerda
     return 2 *i+1;
 }
 
-void subirheap(heap *h, int i){
+void subirheap(heap *h, int i){//sobe o dado se ele for menor que o pai
     while (i != 0 && h->dados[pai(i)] > h->dados[i]){
         trocar(&h->dados[pai(i)], &h->dados[i]);
         i = pai(i);
     }
 }
 
- void inserir(heap *h,int valor){
+ void inserir(heap *h,int valor){//função para inserir dados no heap
     if(h->tamanho == h->capacidade){
         printf("O Heap está cheio!\n");
         return;
@@ -52,7 +52,7 @@ void subirheap(heap *h, int i){
     subirheap(h, i);
  }
 
- void descerheap(heap *h, int i) {
+ void descerheap(heap *h, int i) {//desce o dado se ele for maior
 
     int esq = filhoesq(i);
     int dir = filhodir(i);
@@ -70,7 +70,7 @@ void subirheap(heap *h, int i){
     }
 }
 
-int removermin(heap *h){
+int removermin(heap *h){//remove o min-heap(raiz)
      if (h->tamanho == 0){
         printf("Heap vazio!\n");
         return -1;
@@ -83,7 +83,7 @@ int removermin(heap *h){
     return raiz;
 }
 
-void imprimirheap(heap *h){
+void imprimirheap(heap *h){//imprime o heap
     for( int cont = 0;cont < h->tamanho;cont++){
         printf("%d:%d",cont,h->dados[cont]);
         printf("\n");
