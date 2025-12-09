@@ -119,6 +119,10 @@ int main(){
                 while (getchar() != '\n');
                 break;
             }
+            if(h->tamanho == h->capacidade){
+                printf("Capacidade maxima atingida!\n");
+                break;
+            }
             printf("Insira um dado:\n");
             if (scanf("%d", &data) != 1) {
                 while (getchar() != '\n');
